@@ -73,7 +73,7 @@ namespace CadastroEva.Entities
             
         }
 
-        public override string ProcuraNome()
+        public override string ProcuraNome(int id)
         {
             throw new NotImplementedException();
         }
