@@ -10,11 +10,11 @@ namespace CadastroEva.Entities
         public Cliente Cliente { get; set; }
         public DateTime Momento { get; set; }
         public double QtMaoDeObra { get; set; }
-        public double VlDesconto { get; set; }
-        public HoraTrabalho HoraTrabalho { get; set; } = new HoraTrabalho();
+        public double VlDesconto { get; set; }        
+        public ProdutoPreco ProdutoPreco { get; set; } = new ProdutoPreco();
         public List<PedidoItem> Items { get; set; } = new List<PedidoItem>();
         private double _vlBasePrice;
-        private double _vlTotal;
+        //private double _vlTotal = 0;
 
         //------------------------------
         //CONSTRUTORES
@@ -44,12 +44,26 @@ namespace CadastroEva.Entities
         public double Total()
         {
             double soma = 0;
-            foreach(PedidoItem item in Items)
+            double _vlTotal = 0;
+            foreach (PedidoItem item in Items)
             {
                 soma += item.SubTotal();
             }
-            _vlTotal = HoraTrabalho.CalculaPreco(QtMaoDeObra, soma, VlDesconto);
+            _vlTotal = ProdutoPreco.CalculaPrecoTotal(QtMaoDeObra, soma, VlDesconto);
             return _vlTotal;
+        }
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Data/Hora Pedido: " + Momento.ToString("dd/MM/yyyy HH:mm:ss"));            
+            sb.AppendLine("Cliente: " + Cliente);
+            sb.AppendLine("Items do Pedido:");
+            foreach (PedidoItem item in Items)
+            {
+                sb.AppendLine(item.ToString());
+            }
+            sb.AppendLine("Preco Total: $ " + Total().ToString("F2", CultureInfo.InvariantCulture));
+            return sb.ToString();
         }
 
 

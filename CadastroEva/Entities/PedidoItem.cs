@@ -7,7 +7,7 @@ namespace CadastroEva.Entities
         public int Id { get; set; }
         public int Quantidade { get; set; }
         public Produto ProdutoPreco { get; set; } = new ProdutoPreco();
-        //public Produto ProdutoNome { get; set; } = new ProdutoNome();
+        public Produto ProdutoNome { get; set; } = new ProdutoNome();
 
         //------------------------------
         //CONSTRUTORES
@@ -31,9 +31,16 @@ namespace CadastroEva.Entities
             //passando o ID como parâmetro
             return Quantidade * ProdutoPreco.CalculaPreco(Id);
         }
-
-
-
+        public override string ToString()
+        {
+            return ProdutoNome.ProcuraNome(Id) //busco o nome do produto
+                + ", R$"
+                + ProdutoPreco.CalculaPreco(Id).ToString("F2", CultureInfo.InvariantCulture) //busco o valor do produto
+                + ", Quantity: "
+                + Quantidade
+                + ", Subtotal: $"
+                + SubTotal().ToString("F2", CultureInfo.InvariantCulture);
+        }
 
     }
 }
