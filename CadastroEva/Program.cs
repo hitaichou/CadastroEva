@@ -33,20 +33,19 @@ namespace CadastroEva
                     Console.WriteLine($"Entre com o #{i} item:");
 
                     Console.WriteLine("Escolha o produto:");
-                    Console.WriteLine("(1) Rosa Monique" + "\n"
-                                    + "(2) Sepala Pequena" + "\n"
-                                    + "(3) Folha de Rosa Grande" + "\n"
-                                    + "(4) Flor Desidratada" + "\n"
-                                    + "(5) Arame" + "\n"
-                                    + "(6) Vaso de Vidro" + "\n"
-                                    + "(7) Fita Floral");
+                    Console.WriteLine("(0) Rosa Monique" + "\n"
+                                    + "(1) Sepala Pequena" + "\n"
+                                    + "(2) Folha de Rosa Grande" + "\n"
+                                    + "(3) Flor Desidratada" + "\n"
+                                    + "(4) Arame" + "\n"
+                                    + "(5) Vaso de Vidro" + "\n"
+                                    + "(6) Fita Floral");
                     int idProduto = int.Parse(Console.ReadLine());
                     Console.WriteLine("Entre com a quantidade:");
                     int qtProduto = int.Parse(Console.ReadLine());
 
-                    Produto produto = (new ProdutoPreco(idProduto, qtProduto));
+                    Produto produto = new Produto(idProduto,  qtProduto);
 
-                    //Instancia a classe OrderItem passando o Id do produto e sua quantidade
                     PedidoItem item = new PedidoItem(idProduto, qtProduto, produto);
                     pedido.AdicionaPedido(item);
                 }

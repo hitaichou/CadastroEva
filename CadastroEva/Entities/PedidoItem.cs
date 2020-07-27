@@ -6,8 +6,7 @@ namespace CadastroEva.Entities
     {
         public int Id { get; set; }
         public int Quantidade { get; set; }
-        public Produto ProdutoPreco { get; set; } = new ProdutoPreco();
-        public Produto ProdutoNome { get; set; } = new ProdutoNome();
+        public Produto Produto { get; set; } = new Produto();
 
         //------------------------------
         //CONSTRUTORES
@@ -15,12 +14,11 @@ namespace CadastroEva.Entities
         public PedidoItem()
         {
         }
-        public PedidoItem(int id, int quantidade, Produto produtopreco/*, Produto produtonome*/)
+        public PedidoItem(int id, int quantidade, Produto produto)
         {
             Id = id;
             Quantidade = quantidade;
-            //ProdutoNome = produtonome;
-            ProdutoPreco = produtopreco;
+            Produto = produto;
         }
         //------------------------------
         //MÉTODOS
@@ -29,13 +27,13 @@ namespace CadastroEva.Entities
         {
             //multiplico a quantidade pelo produto na subclasse CalculaPreco
             //passando o ID como parâmetro
-            return Quantidade * ProdutoPreco.CalculaPreco(Id);
+            return Quantidade * Produto.CalculaPreco(Id);
         }
         public override string ToString()
         {
-            return ProdutoNome.ProcuraNome(Id) //busco o nome do produto
+            return Produto.ProcuraNome(Id) //busco o nome do produto                   
                 + ", R$"
-                + ProdutoPreco.CalculaPreco(Id).ToString("F2", CultureInfo.InvariantCulture) //busco o valor do produto
+                + Produto.CalculaPreco(Id).ToString("F2", CultureInfo.InvariantCulture) //busco o valor do produto
                 + ", Quantity: "
                 + Quantidade
                 + ", Subtotal: $"

@@ -10,12 +10,10 @@ namespace CadastroEva.Entities
         public Cliente Cliente { get; set; }
         public DateTime Momento { get; set; }
         public double QtMaoDeObra { get; set; }
-        public double VlDesconto { get; set; }        
-        public ProdutoPreco ProdutoPreco { get; set; } = new ProdutoPreco();
+        public double VlDesconto { get; set; }
+        public Produto Produto { get; set; } = new Produto();        
         public List<PedidoItem> Items { get; set; } = new List<PedidoItem>();
-        private double _vlBasePrice;
-        //private double _vlTotal = 0;
-
+        
         //------------------------------
         //CONSTRUTORES
         //------------------------------
@@ -35,7 +33,7 @@ namespace CadastroEva.Entities
 
         public void AdicionaPedido(PedidoItem item)
         {
-            Items.Add(item);
+            Items.Add(item);            
         }
         public void RemovePedido(PedidoItem item)
         {
@@ -49,7 +47,7 @@ namespace CadastroEva.Entities
             {
                 soma += item.SubTotal();
             }
-            _vlTotal = ProdutoPreco.CalculaPrecoTotal(QtMaoDeObra, soma, VlDesconto);
+            _vlTotal = Produto.CalculaPrecoTotal(QtMaoDeObra, soma, VlDesconto);
             return _vlTotal;
         }
         public override string ToString()
